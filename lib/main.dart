@@ -76,19 +76,20 @@ class _PerguntaAppState extends State<PerguntaApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            title: Text('Perguntas'),
-          ),
-          body: temPerguntaSelecionada
-              ? Questionario(
-                  perguntas: perguntas,
-                  perguntaSelecionada: perguntaSelecionada,
-                  responder: responder,
-                )
-              : Resultado(
-                  _pontuacaoTotal,
-                  _reiniciarQuestionario,
-                )),
+        appBar: AppBar(
+          title: Text('Perguntas'),
+        ),
+        body: temPerguntaSelecionada
+            ? Questionario(
+                perguntas: perguntas,
+                perguntaSelecionada: perguntaSelecionada,
+                responder: responder,
+              )
+            : Resultado(
+                _pontuacaoTotal,
+                _reiniciarQuestionario,
+              ),
+      ),
     );
   }
 }
