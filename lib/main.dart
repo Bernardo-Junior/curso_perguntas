@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import './questao.dart';
 import './resposta.dart';
+import './questionario.dart';
+import './resultado.dart';
 
 main() => runApp(PerguntaApp());
 
@@ -30,30 +32,35 @@ class _PerguntaAppState extends State<PerguntaApp> {
     }
   }
 
+  dynamic get responder {
+    return _responder;
+  }
+
+  List<Map<String, Object>> get perguntas {
+    return _perguntas;
+  }
+
+  int get perguntaSelecionada {
+    return _perguntaSelecionada;
+  }
+
   bool get temPerguntaSelecionada {
     return _perguntaSelecionada < _perguntas.length;
   }
 
   @override
   Widget build(BuildContext context) {
-    List<String> respostas = temPerguntaSelecionada
-        ? _perguntas[_perguntaSelecionada].cast()['respostas']
-        : [];
-
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Perguntas'),
-        ),
-        body: temPerguntaSelecionada
-            ? Column(
-                children: [
-                  Questao(_perguntas[_perguntaSelecionada]['texto'].toString()),
-                  ...respostas.map((t) => Resposta(t, _responder)).toList(),
-                ],
-              )
-            : null,
-      ),
+          appBar: AppBar(
+            title: Text('Perguntas'),
+          ),
+          body: temPerguntaSelecionada
+              ? Questionario(
+                  perguntas: perguntas,
+                  perguntaSelecionada: perguntaSelecionada,
+                  responder: responder)
+              : Resultado()),
     );
   }
 }
